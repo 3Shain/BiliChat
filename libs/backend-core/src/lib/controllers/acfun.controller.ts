@@ -2,7 +2,7 @@ import { Controller, Get, ParseIntPipe, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { getAcfunRoomInfo } from 'isomorphic-danmaku-server';
 
-@Controller('acfun')
+@Controller('api/acfun')
 export class AcfunController {
 
     @Get('getRoomInfo')

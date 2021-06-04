@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { BilibiliUserService } from '../services/bili-user.service';
 import { getBilibiliRoomInfo } from 'isomorphic-danmaku-server';
 
-@Controller('bili')
+@Controller('api/bili')
 export class BilibiliController {
     constructor(private bilibiliUser: BilibiliUserService) {
 

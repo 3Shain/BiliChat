@@ -1,0 +1,10 @@
+<div class="cell" *ngFor="let control of formArray.controls;let i=index">
+    <button nz-button conditionPopover [variantProperties]="variantProperties" nzType="primary" nzShape="round" [formControl]="control"></button>
+    <!-- <i nz-icon nzType="delete" (click)="deleteCondition(i)" 
+    nz-popconfirm 
+    nzPopconfirmTitle="删除这个条件将同时删除整个变化。确认是否删除？" 
+    [nzCondition]="formArray.length!=1"
+    nzPopconfirmPlacement="bottom" (nzOnConfirm)="removeVariant.next()"></i> -->
+</div>
+<button class="cell" nz-button conditionPopover [variantProperties]="variantProperties" nzType="outline" nzShape="round" (input)="addNewCondition($event)">
+    <i nz-icon nzType="plus"></i>添加条件</button>

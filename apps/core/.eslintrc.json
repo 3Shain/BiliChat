@@ -16,8 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "comen",
-            "style": "camelCase"
+            "prefix": "comen"
           }
         ],
         "@angular-eslint/component-selector": [

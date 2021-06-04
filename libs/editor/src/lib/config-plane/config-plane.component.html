@@ -1,0 +1,19 @@
+<h5>
+    {{sectionSetting.displayName}}
+</h5>
+<ng-container [formGroup]="formGroup">
+    <comen-config-block formControlName="default" [sectionSetting]="sectionSetting"></comen-config-block>
+    <!-- Variants -->
+    <div class="variant" *ngFor="let control of variantsFormArray.controls;let i = index">
+        <i nz-icon nzType="up" (click)="moveUpVariant(i)"></i><i nz-icon nzType="down" (click)="moveDownVariant(i)"></i>
+        <comen-config-condition [formControl]="control.get('condition')" [variantProperties]="vairantProperties" (removeVariant)="removeVariant(i)"></comen-config-condition>
+        <!-- Condition -->
+        <comen-config-block [formControl]="control.get('properties')" [sectionSetting]="sectionSetting">
+        </comen-config-block>
+    </div>
+    <!-- Add Variants -->
+    <div class="variant" *ngIf="sectionSetting.variantProperties!==undefined">
+        <button nz-button nzType="primary" nzShape="round" conditionPopover [variantProperties]="vairantProperties" (input)="addNewVariant($event)"><i nz-icon
+                nzType="plus"></i>添加变化</button>
+    </div>
+</ng-container>

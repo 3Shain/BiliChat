@@ -1,0 +1,35 @@
+<h5 style="margin: 8px 0;">
+    测试
+</h5>
+<div class="list">
+    <ng-container *ngIf="mockGens.length > 0;else elseTpl">
+        <div class="item" *ngFor="let mock of mockGens" (click)="select(mock.id)"
+            [ngClass]="{'active':currentSelect===mock.id}">
+            <fa-icon [icon]="faPlay" (click)="generateMock(mock,$event)"></fa-icon>
+            {{mock.name}}
+        </div>
+    </ng-container>
+    <ng-template #elseTpl>
+        <div>当前未设置任何测试消息。</div>
+    </ng-template>
+</div>
+<div class="actions">
+    <button class="transparent" (click)="addMock()">
+        <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+    <button class="transparent" (click)="deleteMock()" [disabled]="currentSelect===null">
+        <fa-icon [icon]="faMinus"></fa-icon>
+    </button>
+    <button class="transparent" (click)="editMock()" [disabled]="currentSelect===null">
+        <fa-icon [icon]="faEdit"></fa-icon>
+    </button>
+    <button class="transparent" *ngIf="realtimeMessageProvider!==null" [attr.type]="realtimeConnecting?'primary':'text'"
+        (click)="connectRealtimeSource($event)">
+        <ng-container *ngIf="realtimeConnecting;else elseTpl">
+            <fa-icon [icon]="faLink"></fa-icon>断开连接
+        </ng-container>
+        <ng-template #elseTpl>
+            <fa-icon [icon]="faLink"></fa-icon>连接实时评论流
+        </ng-template>
+    </button>
+</div>

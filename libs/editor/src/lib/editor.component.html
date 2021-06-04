@@ -1,0 +1,45 @@
+<div fxLayout="row" style="height: 100%;flex-wrap: nowrap;">
+    <div fxFlex="auto" id="preview">
+        <div class="toolbar" fxLayout="row" fxLayoutAlign="center center" [formGroup]="adjustments">
+            <label>尺寸</label>
+            <div>
+                <input type="number" formControlName="width" />
+                <i nz-icon nzType="close" style="margin:0 4px;"></i>
+                <input type="number" formControlName="height" />
+            </div>
+            <label>背景</label>
+            <div>
+                <comen-color-control style="margin-top:2px;margin-right: 8px;" formControlName="background">
+                </comen-color-control>
+                <input type="checkbox" formControlName="grid" />
+            </div>
+        </div>
+        <div class="background" [ngStyle]="{'background-color':adjustments.value.background}"
+            [ngClass]="{'transparent':!adjustments.value.grid}">
+            <div [style.width.px]="adjustments.value.width" [style.height.px]="adjustments.value.height">
+                <ng-content></ng-content>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+    <div class="middle" fxFlex="240px" >
+        <div style="position: relative;flex:none;" [style.height.px]="sHeight">
+            <comen-element-tree [config]="configuration" (sectionHover)="onTreeHover($event)"
+                (sectionClick)="onSectionClick($event)" (leave)="onTreeLeave()" [selected]="currentConfigSection">
+            </comen-element-tree>
+            <div class="resize-handler" (mousedown)="startDrag($event)"></div>
+        </div>
+        <div style="position: relative;border-top:solid 1px #ddd;height:0;">
+            <comen-mock-message-plane></comen-mock-message-plane>
+        </div>
+    </div>
+
+    <div style="position: relative;width: 100%;height: 100%;overflow-x:unset;" fxFlex="300px" [formGroup]="formGroup">
+
+        <comen-config-plane *ngFor="let s of [currentConfig];" [sectionSetting]="s"
+            [formControlName]="currentConfigSection">
+        </comen-config-plane>
+    </div>
+</div>

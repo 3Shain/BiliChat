@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
+  "productName": "Comen",
+  "appId":"app.comen",
+  "copyright": "Copyright © 2020 ${author}",
+  "icon": "assets/icon.png",
+  "directories":{
+    "app": "dist/apps/electron-app",
+    "buildResources": "dist/apps/electron-app"
+  },
+  "win":{
+    "icon": "assets/icon.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true
+  },
+  "mac":{
+    "icon": "assets/icon.png"
+  },
+  "publish": [{
+    "provider": "github",
+    "owner": "3Shain",
+    "repo": "Comen"
+  }]
+}

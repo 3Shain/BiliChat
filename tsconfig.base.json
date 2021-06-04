@@ -20,10 +20,17 @@
       "@comen/backend-core": ["libs/backend-core/src/index.ts"],
       "knexy": ["libs/knexy/src/index.ts"],
       "isomorphic-danmaku": ["libs/isomorphic-danmaku/src"],
+      "isomorphic-danmaku/bilibili": [
+        "libs/isomorphic-danmaku/src/lib/bilibili"
+      ],
+      "isomorphic-danmaku/acfun": ["libs/isomorphic-danmaku/src/lib/acfun"],
       "isomorphic-danmaku-server": [
         "libs/isomorphic-danmaku-server/src/index.ts"
       ],
-      "@comen/common": ["libs/common/src/index.ts"]
+      "@comen/common": ["libs/common/src/index.ts"],
+      "@comen/editor": ["libs/editor/src/index.ts"],
+      "@comen/dogfood": ["libs/dogfood/src/index.ts"],
+      "@comen/delta": ["libs/delta/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

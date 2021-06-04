@@ -1,0 +1,16 @@
+<h5>
+    元素
+</h5>
+
+<div class="list">
+
+    <div class="node" *ngFor="let node of (config.sections | keyvalue:sortNull)" comen-element-tree-node
+        (hover)="onNodeHover(node.key,node.value)" [ngClass]="{'active':selected===node['key']}"
+        (click)="sectionClick.next(node.key)">
+        <span class="indent" *ngFor="let x of [].constructor(node.value.level)"></span>
+        <fa-icon [icon]="node.value['x-icon']"></fa-icon>
+        <!-- You would see error with angular VE language service, this is a known issue. -->
+        <!-- https://github.com/angular/vscode-ng-language-service/issues/946 -->
+        <span>{{node.value['displayName']}}</span>
+    </div>
+</div>

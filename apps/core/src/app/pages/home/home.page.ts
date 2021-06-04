@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { combineLatest, defer, Observable } from 'rxjs';
+import { map, publishBehavior, refCount } from 'rxjs/operators';
+import { OverlayInfo } from '../../addon/definations';
+import { LookupService } from '../../addon/lookup.service';
+import { ComenFile, FileStorage } from '../../file';
+import { nanoid } from 'nanoid';
 
 @Component({
     selector: 'comen-home',
@@ -14,29 +17,60 @@ import { map, startWith } from 'rxjs/operators';
 // eslint-disable-next-line
 export class HomePage {
 
-    platform$: Subject<string> = new BehaviorSubject('bilibili');
-
-    roomId = new FormControl('123456');
-
-    generatedLink = combineLatest([this.platform$, this.roomId.valueChanges.pipe(startWith(this.roomId.value))]).pipe(
-        map(([platform, id]) => {
-            return `${window.location.origin}/${platform}/${id}`
-        })
-    )
-
-    constructor(private title: Title) {
-        title.setTitle('主页');
-        if (window.location.host == 'bilichat.3shain.com') {
-            window.location.href = 'https://github.com/3Shain/Comen/tree/bilichat';
-        }
+    constructor(
+        private file: FileStorage,
+        private lookup: LookupService,
+        private router: Router) {
     }
 
-    setPlatform(platform: string) {
-        this.platform$.next(platform);
+
+    overlays$ = defer(() => this.lookup.getOverlays()).pipe(
+        publishBehavior([] as OverlayInfo[]),
+        refCount()
+    ) as Observable<OverlayInfo[]>;
+
+    files$ = combineLatest([this.overlays$, defer(() => this.file.getList())]).pipe(
+        map(([overlays, files]) => {
+            return files.map(x => {
+                return {
+                    ...overlays.find(s => s.name == x.constraint.name),
+                    ...x
+                }
+            }).sort((a, b) => b.lastModified - a.lastModified);
+        }),
+        publishBehavior([]),
+        refCount()
+    );
+
+    addFile() {
+        // TODO: add file plane:
     }
 
-    clickLink(event:Event){
-        (event.target as HTMLInputElement).select();
-        document.execCommand('copy');
+    async openFile(file: ComenFile) {
+        this.router.navigate(['edit'], {
+            queryParams: {
+                o: file.constraint.name,
+                id: file.id
+            }
+        });
+    }
+
+    async createFile(overlay: OverlayInfo) {
+        const file = await this.file.addNewFile(`${overlay.displayName}-${nanoid(8)}`, {
+            name: overlay.name,
+            version: overlay.version
+        });
+        this.router.navigate(['edit'], {
+            queryParams: {
+                o: overlay.name,
+                id: file.id
+            }
+        });
+    }
+
+    async deleteFile(file:ComenFile){
+        // TODO: event handler triggered open
+        await this.file.removeFile(file);
+        // TODO: pop out
     }
 }

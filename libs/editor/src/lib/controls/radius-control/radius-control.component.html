@@ -1,0 +1,32 @@
+<div fxLayout="row">
+    <div nz-col nzSpan=24>
+        <!-- <nz-radio-group [formControl]="mode" nzSize="small" nzButtonStyle="solid">
+            <label nz-radio-button nzValue="single"><i nz-icon nzType="border"></i></label>
+            <label nz-radio-button nzValue="seperate"><i nz-icon nzType="expand"></i></label>
+        </nz-radio-group> -->
+    </div>
+    <ng-container *ngIf="mode.value==='single';else elseTpl">
+        <div nz-col nzSpan=6>
+            <!-- <nz-input-number [formControl]="single" nzSize="small"></nz-input-number> -->
+        </div>
+        <div nz-col nzSpan=18></div>
+    </ng-container>
+    <ng-template [formGroup]="formGroup" #elseTpl>
+        <!-- <div nz-col nzSpan=6>
+            <nz-input-number formControlName="value1" nzSize="small"></nz-input-number>
+        </div><div nz-col nzSpan=6>
+            <nz-input-number formControlName="value2" nzSize="small"></nz-input-number>
+        </div><div nz-col nzSpan=6>
+            <nz-input-number formControlName="value3" nzSize="small"></nz-input-number>
+        </div><div nz-col nzSpan=6>
+            <nz-input-number formControlName="value4" nzSize="small"></nz-input-number>
+        </div> -->
+    </ng-template>
+    <label nz-col nzSpan=6>单位</label>
+    <div nz-col nzSpan=18>
+        <!-- <nz-radio-group [formControl]="formGroup.get('unit')" nzSize="small" nzButtonStyle="solid">
+            <label nz-radio-button nzValue="px">像素</label>
+            <label nz-radio-button nzValue="percent">百分比</label>
+        </nz-radio-group> -->
+    </div>
+</div>

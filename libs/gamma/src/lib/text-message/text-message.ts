@@ -58,4 +58,8 @@ export class TextMessageRenderer {
     // eslint-disable-next-line
     return (this.message as RichTextMessage).richtext as any;
   }
+
+  get platformExtra(){
+    return (this.message as TextMessage).platformUserExtra ?? {} as any;
+  }
 }

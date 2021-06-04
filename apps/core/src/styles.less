@@ -1,0 +1,73 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+@primary-color: #a16ba1;
+
+.full-width {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    font-size: 14px;
+}
+
+button.transparent {
+    border: none;
+    background-color: transparent;
+    user-select: none;
+    margin: unset;
+    padding: unset;
+    cursor: pointer;
+    color: #333;
+
+    &[disabled] {
+        color: #999;
+    }
+    &>fa-icon:not(:last-child){
+        margin-right: 4px;
+    }
+}
+
+
+button {
+    &.cm {
+        border-radius: 4px;
+        border: solid 1px #f3f1f3;
+        background-color: white;
+        font-size: 12px;
+        padding: 4px;
+        cursor: pointer;
+
+        &[disabled]{
+            cursor: not-allowed;
+        }
+
+        &.primary {
+            color: white;
+            background-color: #a16ba1;
+        }
+
+        &.secondary {
+
+        }
+
+        &.full-width {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+input[type='text'].cm {
+    
+}
+
+input[type='checkbox'].cm {
+
+}
+
+.list {
+    &.cm {
+
+    }
+}

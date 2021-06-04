@@ -3,7 +3,8 @@
         width="24" style="background-color: transparent;" loaded="">
         <img id="img" class="style-scope yt-img-shadow" alt="" height="24" width="24" [src]="message.avatar">
     </yt-img-shadow>
-    <div id="content" class="style-scope yt-live-chat-text-message-renderer">
+    <div id="content" class="style-scope yt-live-chat-text-message-renderer"
+        [attr.bili-guard]="platformExtra.guardType">
         <span id="timestamp" class="style-scope yt-live-chat-text-message-renderer">
             {{date | date:'hh:mm a'}}
         </span>
@@ -38,8 +39,7 @@
                     <yt-live-chat-author-badge-renderer class="style-scope yt-live-chat-author-chip" aria-label=""
                         [type]="badge.type">
                         <div id="image" class="style-scope yt-live-chat-author-badge-renderer">
-                            <img [src]="badge.badge | nzSanitizer:'url'"
-                                class="style-scope yt-live-chat-author-badge-renderer" alt="">
+                            <img [src]="badge.badge" class="style-scope yt-live-chat-author-badge-renderer" alt="">
                         </div>
 
                     </yt-live-chat-author-badge-renderer>

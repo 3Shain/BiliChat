@@ -1,0 +1,79 @@
+:host {
+    display: flex;
+    width: 100vw;
+    height: 100vh; /* weird */
+    flex-direction: column;
+
+    & > header {
+        display: flex;
+        height: 50px;
+        align-items: center;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+            0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+        & > #logo {
+            display: inline-block;
+            padding: 12px 16px;
+            height: 50px;
+            color: #a16ba1;
+            &:hover {
+                cursor: pointer;
+            }
+            & > svg {
+                fill: currentColor;
+                height: 100%;
+            }
+        }
+
+        & > .workspace {
+        }
+
+        & > .fill {
+            flex: 1;
+        }
+
+        & > .assets-info {
+            #assets-indicator {
+                display: inline-block;
+                height: 26px;
+                width: 26px;
+                border-radius: 50%;
+                border: solid 1px #ddd;
+                background: conic-gradient(
+                    #ddd 0%,
+                    #ddd 70%,
+                    white 70%,
+                    white 100%
+                );
+            }
+        }
+
+        & > .action-group {
+        }
+
+        [nz-button] {
+            margin-left: 8px;
+        }
+    }
+
+    & > comen-editor {
+        flex: auto;
+    }
+}
+
+#dialog {
+    background-color: white;
+    display: flex;
+    border-radius: 4px;
+    padding: 16px;
+
+    & > #mock {
+        width: 550px;
+        height: 850px;
+        margin-right: 16px;
+    }
+
+    & > #info {
+        width: 450px;
+    }
+}

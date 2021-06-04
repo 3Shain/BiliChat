@@ -1,0 +1,25 @@
+delta-root {
+    background-color: wheat;
+
+    height: 100%;
+    width: 100%;
+
+    & > #scroller {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        & > #items {
+            & > #text-message {
+                display: grid;
+                grid-template-columns: min-content auto;
+                &>#avatar {
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+}
+
+body {
+    margin: 0;
+}

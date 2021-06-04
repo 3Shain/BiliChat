@@ -1,0 +1,37 @@
+:host {
+    & > .control {
+        margin-bottom: 16px;
+        min-height: 28px;
+
+        & > label {
+            display: block;
+            width: 100%;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 8px;
+            // border-top: #ddd 1px solid;
+
+            & > i[nz-icon] {
+                margin-right: 4px;
+            }
+            & > i[nzType='close'] {
+                opacity: 0;
+                margin-left: 6px;
+                cursor: pointer;
+                transition: opacity 0.2s ease;
+                color: #7f7f7f;
+            }
+
+            &:hover {
+                & > i[nzType='close'] {
+                    opacity: 1;
+                }
+            }
+        }
+
+        & > div {
+            // line-height: 28px;
+            // min-height: 28px;
+        }
+    }
+}

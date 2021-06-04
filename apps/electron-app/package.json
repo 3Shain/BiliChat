@@ -1,0 +1,28 @@
+{
+  "name": "comen",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3Shain/Comen"
+  },
+  "author": {
+    "name": "3Shain"
+  },
+  "description": "Comment box rendered in html5 for live stream",
+  "keywords": [
+    "bilibili",
+    "acfun",
+    "youtube",
+    "livechat",
+    "comen",
+    "comment"
+  ],
+  "dependencies": {
+    "@nestjs/platform-express": "^7.0.0",
+    "rxjs": "~6.5.5"
+  },
+  "devDependencies": {
+    "electron":""
+  }
+}

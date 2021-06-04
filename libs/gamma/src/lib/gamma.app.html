@@ -1,5 +1,6 @@
-<div *ngrxLet="config.current$ as cc" id="contents" class="style-scope yt-live-chat-app">
-    <yt-live-chat-renderer class="style-scope yt-live-chat-app" has-ticker="" [attr.hide-timestamps]="cc.hideTimestamp?'':null" style="--scrollbar-width:15px;">
+<div *ngrxLet="config.current$ as config" id="contents" class="style-scope yt-live-chat-app">
+    <yt-live-chat-renderer class="style-scope yt-live-chat-app" has-ticker=""
+        [attr.hide-timestamps]="config.hideTimestamp?'':null" style="--scrollbar-width:15px;">
         <iron-pages id="content-pages" class="style-scope yt-live-chat-renderer">
             <div id="chat-messages" class="style-scope yt-live-chat-renderer iron-selected">
                 <div id="contents" class="style-scope yt-live-chat-renderer">
@@ -27,7 +28,7 @@
                     <div id="chat" class="style-scope yt-live-chat-renderer">
                         <div id="item-list" class="style-scope yt-live-chat-renderer" allow-scroll="">
                             <!-- itemlist renderer -->
-                            <yt-live-chat-item-list-renderer class="style-scope yt-live-chat-renderer" allow-scroll="">
+                            <yt-live-chat-item-list-renderer class="style-scope yt-live-chat-renderer">
                                 <div id="contents" class="style-scope yt-live-chat-item-list-renderer">
                                     <div id="item-scroller" (scroll)="onScroll($event)"
                                         class="style-scope yt-live-chat-item-list-renderer animated" #scroller>
@@ -40,7 +41,7 @@
                                                     [ngSwitch]="queuedMsg.type">
                                                     <div style="height:100vh" *ngSwitchCase="'blank'"></div>
                                                     <yt-live-chat-text-message-renderer [message]="queuedMsg"
-                                                        *ngSwitchCase="'text'">
+                                                        [context]="queuedMsg" *ngSwitchCase="'text'">
                                                     </yt-live-chat-text-message-renderer>
                                                     <yt-live-chat-text-message-renderer [message]="queuedMsg"
                                                         *ngSwitchCase="'richtext'">

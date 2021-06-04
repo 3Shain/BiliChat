@@ -1,0 +1,60 @@
+<div #view class="view">
+    <div #container [ngStyle]="{'width':size[0]+'px','height':size[1]+'px'}">
+        <ng-content></ng-content>
+    </div>
+</div>
+<div class="controls">
+    <div class="control notimportant">
+        <label></label>
+        <div class="body">
+            <input type="checkbox"><span>本地文件</span>
+        </div>
+    </div>
+    <div class="control">
+        <label>URL</label>
+        <div class="body">
+            <input type="text" readonly [attr.value]="url">
+        </div>
+    </div>
+    <div class="control notimportant">
+        <label>宽度</label>
+        <div class="body">
+            <input type="text" readonly [attr.value]="size[0]">
+        </div>
+    </div>
+    <div class="control notimportant">
+        <label>高度</label>
+        <div class="body">
+            <input type="text" readonly [attr.value]="size[1]">
+        </div>
+    </div>
+    <div class="control">
+        <label></label>
+        <div class="body">
+            <input type="checkbox" checked><span>使用自定义帧率</span>
+            <br>
+            <input type="checkbox" checked><span>将音频重新路由到OBS</span>
+        </div>
+    </div>
+    <div class="control">
+        <label>FPS</label>
+        <div class="body">
+            <input type="text" readonly value="60">
+        </div>
+    </div>
+
+    <div class="control">
+        <label>自定义 CSS</label>
+        <div class="body">
+            <textarea (click)="clickCss($event)">{{cssInfo}}</textarea>
+        </div>
+    </div>
+    <div class="control">
+        <label></label>
+        <div class="body">
+            <input type="checkbox" checked><span>不可见时关闭源</span>
+            <br>
+            <input type="checkbox"><span>场景变为活动状态时,刷新浏览器</span>
+        </div>
+    </div>
+</div>

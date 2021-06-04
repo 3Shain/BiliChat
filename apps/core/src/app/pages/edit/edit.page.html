@@ -1,0 +1,80 @@
+<header>
+    <div id="logo" (click)="returnDashboard()">
+        <svg viewBox="0 0 1627.88 1000.29">
+            <use xlink:href="assets/logo.svg#图层_2"></use>
+        </svg>
+    </div>
+    <div class="workspace">
+        <input nz-input nzBorderless />
+    </div>
+    <div class="fill">
+
+    </div>
+    <div class="assets-info">
+        <div id="assets-indicator"></div>
+        <span>可用空间: 30%</span>
+    </div>
+    <div class="action-group">
+        <button nz-button nzType="default" nzSize="large"><i nz-icon nzType="import"></i>导入</button>
+        <button nz-button nzType="default" nzSize="large" (click)="export()">
+            <i nz-icon nzType="export"></i>导出
+        </button>
+        <button nz-button nzType="primary" nzSize="large" (click)="generate()">
+            <i nz-icon nzType="format-painter"></i>生成
+        </button>
+    </div>
+</header>
+<comen-editor [configuration]="configuration" [elementView]="overlayContainerElement" #editor="editor">
+    <comen-overlay-container #container="overlayContainer"></comen-overlay-container>
+</comen-editor>
+
+<ng-template #dialogTpl let-css="css" let-url="url" let-size="size">
+    <div id="dialog" [@zoomBigMotion]="'active'">
+        <div id="mock">
+            <comen-mock-obs-dialog [cssInfo]="css" [url]="url" [size]="size">
+                <ng-container #mark></ng-container>
+            </comen-mock-obs-dialog>
+        </div>
+        <div id="info">
+            <h1>一切已就绪！</h1>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #connectDialogTpl>
+    <div class="ant-popover ant-popover-placement-top" [@zoomBigMotion]="'active'" [style.width.px]="200">
+        <div class="ant-popover-content">
+            <div class="ant-popover-arrow"></div>
+            <div class="ant-popover-inner">
+                <div>
+                    <div class="ant-popover-inner-content">
+                        <div class="ant-popover-message">
+                            <label>
+                                源
+                            </label>
+                            <div>
+                                <select style="width: 100%;" #source>
+                                    <option [value]='source.name' [label]="source.displayName"
+                                        *ngFor="let source of source$|async"></option>
+                                </select>
+                            </div>
+                            <label>
+                                频道号
+                            </label>
+                            <div>
+                                <input #channelId />
+                            </div>
+                        </div>
+                        <div class="ant-popover-buttons">
+                            <button (click)="confirmDialog$.next(null)">取消</button>
+                            <button (click)="confirmDialog$.next({
+                                'source': source.value,
+                                'channel': channelId.value
+                            })">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

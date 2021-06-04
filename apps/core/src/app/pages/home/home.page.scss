@@ -1,79 +1,79 @@
 :host {
-    box-sizing: border-box;
-    padding: 16px;
     display: block;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fafbfc;
-}
-
-.in {
-    color: #586069;
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important;;
-}
-
-.icon-button {
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 16px;
-    margin: 16px;
-    &>svg{
-        height: 72px;
-        width: 72px;
-    }
-
-    color: #aabaca;
-
-    transition: color 0.5s ease, background-color 0.5s ease;
-
-    &.selected {
-        color: white;
-        background-color: #aabaca;
-    }
-
-    &:hover{
-        color: var(--primary-color);
-        background-color: #eaebec;
-    }
-
-    &.bilibili {
-        --primary-color: #00a1d6;
-    }
-
-    &.acfun {
-        --primary-color:  #FD4C5D;
-    }
-}
-
-#cover {
-    height: calc(100% - 48px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    &>#platforms {
-        display: flex;
-    }
-
-    .generate-link {
-        cursor: pointer;
-        border-radius: 5px;
-        padding: 10px 16px;
-        color: #555;
-        border: 1px #cccccc solid;
-        font-variant-ligatures: none;
-        font-family: "Fira Mono", "Andale Mono", "Consolas", monospace;
-        letter-spacing: 0px;
-        display: inline-block;
-        width: 400px;
-        line-height: 24px;
-        transition: background-color 0.5s ease;
-        user-select: none;
-        
-
-        &:hover {
-            background-color: #eaebec;
+    padding-top: 5vh;
+    min-width: 1024px;
+    user-select: none;
+    &>main {
+        width: 960px;
+        margin: 0 auto;
+        h1 {
+            color: inherit;
+            margin: 0;
+            font-family: 'Baloo Chettan 2', cursive;
+            font-weight: 500;
+            font-size: 40px;
+        }
+    
+        h2 {
+            font-weight: 300;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        #right {
+            &>div{
+                margin-bottom: 32px;
+            }
+            .overlay-button {
+                text-align: left;
+                & > div {
+                    &:hover {
+                        background-color: #eee;
+                        cursor: pointer;
+                    }
+                    display: flex;
+                    padding: 16px;
+                    & > img {
+                        --size: 36px !important;
+                        width: var(--size) !important;
+                        height: var(--size) !important;
+                    }
+                    & > div {
+                        margin-left: 16px;
+                        flex: 1;
+                        & > h3 {
+                            font-size: 14px;
+                            line-height: 16px;
+                            font-weight: 400;
+                            margin-bottom: 4px;
+                        }
+                        & > p {
+                            font-weight: 300;
+                            color: #555;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+            .file-button {
+                &:hover {
+                    background-color: #eee;
+                    cursor: pointer;
+                }
+                padding: 12px;
+                display: flex;
+                line-height: 24px;
+    
+                & > div > img {
+                    --size: 24px !important;
+                    width: var(--size) !important;
+                    height: var(--size) !important;
+                }
+            }
         }
     }
 }
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@500&display=swap');

@@ -1,0 +1,10 @@
+<div fxLayout="row" [formGroup]="formGroup">
+    <label nz-col nzSpan=6>颜色</label>
+    <div nz-col nzSpan=18>
+        <comen-color-control formControlName="color"></comen-color-control>
+    </div>
+    <label nz-col nzSpan=6>大小</label>
+    <div nz-col nzSpan=18>
+        <comen-range-control formControlName="width" [max]="5" [min]="0" [step]="0.1"></comen-range-control>
+    </div>
+</div>

@@ -13,18 +13,32 @@
       "prefix": "comen",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/apps/core",
+            "customWebpackConfig": {
+              "path": "apps/core/webpack.config.ts"
+            },
             "index": "apps/core/src/index.html",
             "main": "apps/core/src/main.ts",
             "polyfills": "apps/core/src/polyfills.ts",
             "tsConfig": "apps/core/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/core/src/favicon.ico", "apps/core/src/assets"],
-            "styles": ["apps/core/src/styles.scss"],
+            "assets": [
+              "apps/core/src/favicon.ico",
+              "apps/core/src/assets"
+            ],
+            "styles": [
+              "apps/core/src/styles.less"
+            ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["protobufjs"]
+            "allowedCommonJsDependencies": [
+              "protobufjs",
+              "escodegen",
+              "date-fns",
+              "react",
+              "react-dom"
+            ]
           },
           "configurations": {
             "production": {
@@ -53,14 +67,23 @@
                   "maximumError": "10mb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
+          "defaultConfiguration": "production",
           "outputs": ["{options.outputPath}"]
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "core:build",
+            "browserTarget": "core:build:development",
             "proxyConfig": "apps/core/proxy.conf.json"
           },
           "configurations": {
@@ -357,10 +380,147 @@
           }
         }
       }
+    },
+    "editor": {
+      "projectType": "library",
+      "root": "libs/editor",
+      "sourceRoot": "libs/editor/src",
+      "prefix": "comen",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/editor/src/**/*.ts",
+              "libs/editor/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/editor"],
+          "options": {
+            "jestConfig": "libs/editor/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "electron-app": {
+      "root": "apps/electron-app",
+      "sourceRoot": "apps/electron-app/src",
+      "projectType": "application",
+      "prefix": "electron-app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "nx-electron:build",
+          "options": {
+            "outputPath": "dist/apps/electron-app",
+            "webpackConfig": "apps/electron-app/webpack.config.js",
+            "main": "apps/electron-app/src/main.ts",
+            "tsConfig": "apps/electron-app/tsconfig.app.json",
+            "assets": ["apps/electron-app/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/electron-app/src/environments/environment.ts",
+                  "with": "apps/electron-app/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "nx-electron:execute",
+          "options": {
+            "buildTarget": "electron-app:build"
+          }
+        },
+        "package": {
+          "builder": "nx-electron:package",
+          "options": {
+            "name": "electron-app",
+            "frontendProject": "core",
+            "outputPath": "dist/packages",
+            "prepackageOnly": true
+          }
+        },
+        "make": {
+          "builder": "nx-electron:make",
+          "options": {
+            "name": "electron-app",
+            "frontendProject": "core",
+            "outputPath": "dist/executables"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/electron-app/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/electron-app"],
+          "options": {
+            "jestConfig": "apps/electron-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "dogfood": {
+      "root": "libs/dogfood",
+      "sourceRoot": "libs/dogfood/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/dogfood/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dogfood"],
+          "options": {
+            "jestConfig": "libs/dogfood/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "delta": {
+      "root": "libs/delta",
+      "sourceRoot": "libs/delta/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/delta/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delta"],
+          "options": {
+            "jestConfig": "libs/delta/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "pnpm"
   },
   "schematics": {
     "@nrwl/angular": {
@@ -380,6 +540,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   },
   "defaultProject": "core"

@@ -1,0 +1,14 @@
+:host {
+    display: block;
+
+    &>.cell {
+        display: inline-block;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        &>i {
+            margin-left: 2px;
+            color: #999;
+            cursor: pointer;
+        }
+    }
+}

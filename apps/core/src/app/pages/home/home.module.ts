@@ -1,23 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HomePage } from './home.page';
-import { ReactiveComponentModule } from '@ngrx/component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { HomePage } from './home.page';
+import { TimeAgoPipe } from './time-ago.pipe';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-    declarations: [HomePage],
+    declarations: [HomePage, TimeAgoPipe],
     imports: [
         CommonModule,
-        ReactiveComponentModule,
+        FlexLayoutModule,
         ReactiveFormsModule,
-        RouterModule.forChild([{
-            path: '',
-            pathMatch: 'full',
-            component: HomePage
-        }])
-    ]
+        ReactiveComponentModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                pathMatch: 'full',
+                component: HomePage,
+            },
+        ]),
+    ],
 })
-export class HomeModule {
-
-}
+export class HomeModule {}
